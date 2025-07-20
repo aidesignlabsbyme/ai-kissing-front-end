@@ -1,39 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AI Kissing Generator</title>
+  <meta charset="UTF-8">
+  <title>💋 AI Kissing Generator</title>
   <style>
     body {
-      font-family: sans-serif;
-      padding: 20px;
-      max-width: 500px;
-      margin: auto;
+      font-family: Arial, sans-serif;
       text-align: center;
+      padding: 2rem;
+      background-color: #fdfdfd;
+    }
+    h1 {
+      color: #e6005c;
     }
     input, button {
-      margin: 10px 0;
-      padding: 10px;
-      width: 100%;
+      margin: 1rem 0;
+      padding: 0.5rem;
+      font-size: 1rem;
     }
-    img {
-      margin-top: 20px;
+    button {
+      background-color: #e6005c;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    #result img {
       max-width: 100%;
+      margin-top: 2rem;
+      border-radius: 1rem;
     }
   </style>
 </head>
 <body>
 
-  <h2>💋 AI Kissing Generator</h2>
+  <h1>💋 AI Kissing Generator</h1>
 
   <form id="kissForm">
-    <label>Select Face A:</label><br>
-    <input type="file" name="image1" required><br>
-
-    <label>Select Face B:</label><br>
-    <input type="file" name="image2" required><br>
-
+    <div>
+      <label>Select Face A:</label><br>
+      <input type="file" name="image1" required>
+    </div>
+    <div>
+      <label>Select Face B:</label><br>
+      <input type="file" name="image2" required>
+    </div>
     <button type="submit">Generate Kiss</button>
   </form>
 
@@ -45,7 +55,7 @@
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      resultDiv.innerHTML = "Generating...";
+      resultDiv.innerHTML = '🌀 Generating... Please wait...';
 
       const formData = new FormData(form);
 
@@ -57,14 +67,14 @@
 
         const data = await res.json();
 
-        if (data.output) {
-          resultDiv.innerHTML = `<img src="${data.output}" alt="Generated Kiss Image"/>`;
+        if (data.result) {
+          resultDiv.innerHTML = `<img src="${data.result}" alt="Kiss Result" />`;
         } else {
-          resultDiv.innerHTML = "❌ Failed to generate image.";
+          resultDiv.innerHTML = '❌ Failed to generate. Check server or image format.';
           console.error(data);
         }
       } catch (err) {
-        resultDiv.innerHTML = "❌ Error occurred.";
+        resultDiv.innerHTML = '❌ Error occurred. See console.';
         console.error(err);
       }
     });
